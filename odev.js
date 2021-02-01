@@ -2,20 +2,20 @@
 
 1. mycarDetails fonksiyonunu "GA12345 Toyota" ciktisini verecek sekilde duzenleyin.
 
+// ! arrow function cozumunu dene
 **/
 
-var car = { 
-    registrationNumber: "GA12345",
-    brand: "Toyota",
+const car = {
+  registrationNumber: 'GA12345',
+  brand: 'Toyota',
+  displayDetails: function () {
+    console.log(this.registrationNumber + ' ' + this.brand);
+  },
+};
 
-    displayDetails: function(){
-        console.log(this.registrationNumber + " " + this.brand);
-    }
-}
-
-var myCarDetails =  car.displayDetails;
+// Cozum 1
+const myCarDetails = car.displayDetails.bind(car);
 myCarDetails();
-
 
 /** 
 
@@ -25,32 +25,73 @@ name string olmali
 name bos olmamali
 bosluk icerebilir, ancak bosluk haridcindeki isimler en az 2 karakterden olusmali.
 
+// ! gecici olarak cozum bulundu uzerine daha cok dusun
+
 **/
 
 function isValidName(name) {
-  /// your code here
+  if (typeof name === 'string' && name !== '') {
+    let words = name.split(' ');
+    for (let i = 0; i < words.length; ++i) {
+      if (words[i].length < 2) {
+        return false;
+      }
+    }
+    return true;
+  } else {
+    return false;
+  }
 }
 
+const tests = [
+  'mehmet', // true
+  'selcuk', // true
+  'mehmet selcuk', // true
+  'mehmet selcuk a', // false
+  '', // false
+  'a', // false
+  'a a', // false
+  12, // false
+  true, // false
+  null, // false
+  NaN, // false
+  undefined, // false
+  {}, // false
+  [], // false
+  '12', // true ?
+];
 
+tests.map((element) => {
+  console.log(`${element} = `, isValidName(element));
+});
 
 /**
 
 
 3. summary fonkisyonunu ciktisi "Brave New World was written by Aldous Huxley. It is a dystopian novel written in 1932." olacak sekilde cagirin.
 
+
+// ! arrow function cozumunu dene
 **/
 
 const book = {
   title: 'Brave New World',
   author: 'Aldous Huxley',
-}
+};
 
 function summary(genre, year) {
   console.log(
-    `${this.title} was written by ${this.author}. It is a ${genre} novel written in ${year}.`,
-  )
+    `${this.title} was written by ${this.author}. It is a ${genre} novel written in ${year}.`
+  );
 }
 
-
-
-
+// Cozum 1
+summary.call(book, 'dystopian', 1932);
+// Cozum 2.1
+summary.apply(book, ['dystopian', 1932]);
+// Cozum 2.2
+const params = ['dystopian', 1932];
+summary.apply(book, params);
+// Cozum 3
+const summaryBinded = summary.bind(book, 'dystopian', 1932);
+summaryBinded();
