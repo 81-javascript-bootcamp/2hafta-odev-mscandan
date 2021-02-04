@@ -17,6 +17,12 @@ const car = {
 const myCarDetails = car.displayDetails.bind(car);
 myCarDetails();
 
+// Cozum 2
+const myCarDetails2 = () => {
+  car.displayDetails();
+};
+myCarDetails2();
+
 /** 
 
 2.name parametresi alan bir isValidName fonksiyonu yazin. Fonksiyon asagidaki kosullarin hepsi saglaniyorsa true, saglanmiyorsa false donmelidir:
@@ -25,19 +31,13 @@ name string olmali
 name bos olmamali
 bosluk icerebilir, ancak bosluk haridcindeki isimler en az 2 karakterden olusmali.
 
-// ! gecici olarak cozum bulundu uzerine daha cok dusun
 
 **/
 
 function isValidName(name) {
   if (typeof name === 'string' && name !== '') {
-    let words = name.split(' ');
-    for (let i = 0; i < words.length; ++i) {
-      if (words[i].length < 2) {
-        return false;
-      }
-    }
-    return true;
+    const words = name.split(' ');
+    return words.every((word) => word.length >= 2);
   } else {
     return false;
   }
@@ -50,7 +50,7 @@ const tests = [
   'mehmet selcuk a', // false
   '', // false
   'a', // false
-  'a a', // false
+  'a  a', // false
   12, // false
   true, // false
   null, // false
@@ -58,7 +58,6 @@ const tests = [
   undefined, // false
   {}, // false
   [], // false
-  '12', // true ?
 ];
 
 tests.map((element) => {
@@ -71,7 +70,6 @@ tests.map((element) => {
 3. summary fonkisyonunu ciktisi "Brave New World was written by Aldous Huxley. It is a dystopian novel written in 1932." olacak sekilde cagirin.
 
 
-// ! arrow function cozumunu dene
 **/
 
 const book = {
