@@ -2,7 +2,6 @@
 
 1. mycarDetails fonksiyonunu "GA12345 Toyota" ciktisini verecek sekilde duzenleyin.
 
-// ! arrow function cozumunu dene
 **/
 
 const car = {
@@ -30,7 +29,6 @@ myCarDetails2();
 name string olmali
 name bos olmamali
 bosluk icerebilir, ancak bosluk haridcindeki isimler en az 2 karakterden olusmali.
-
 
 **/
 
